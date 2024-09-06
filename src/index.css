@@ -1,3 +1,4 @@
+/* Estilo general */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,61 +8,106 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+main {
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilo del código */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.favButton{
+
+.favButton {
   background-color: rgba(136, 136, 136, 0.116);
   padding: 10px;
   border: none;
   width: 100%;
   cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-h1{
+.favButton:hover {
+  background-color: rgba(136, 136, 136, 0.3);
+}
+
+h1 {
   text-align: center;
 }
 
-nav{
+/* Estilo del nav */
+nav {
   display: flex;
-  width: 80vw;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
+  background-color: #acbbc9;
 }
 
-a{
+nav img {
+  width: 150px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
   color: #000;
   text-decoration: none;
-  margin: 5px;
-  cursor: pointer;
+  font-size: 18px;
 }
-a:hover{
-  color: rgb(136, 136, 136);
-} 
 
+.nav-links a:hover {
+  color: rgb(136, 136, 136);
+}
+
+/* Estilo del footer */
 footer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
   padding: 2rem;
   position: relative;
   bottom: 0;
-  width: 90%;
-  height: 40px;
+  width: 100%;
+  height: auto; /* Ajusta el tamaño según el contenido */
   margin-top: 2rem;
 }
 
-footer > img{
+footer > img {
   width: 200px;
-  margin: 0;
+  margin: 1rem 0; /* Espacio entre el botón y la imagen */
 }
-footer > p{
+
+footer > p {
   margin: 0;
   padding-top: 0.7rem;
 }
 
-form{
+.back-button {
+  background-color: #d32f2f;
+  color: #ffffff;
+  border: none;
+  padding: 15px 40px;  /* Botón más largo y alto */
+  margin-bottom: 1.5rem; /* Espacio debajo del botón */
+  cursor: pointer;
+  font-size: 20px; /* Texto del botón más grande */
+  text-align: center;
+}
+
+.back-button:hover {
+  background-color: #b71c1c;
+}
+
+form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -70,37 +116,43 @@ form{
   margin: 0 auto;
 }
 
-.card{
+/* Estilo de las cards */
+.card {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
-  width: 200px;
-  padding: 0.5rem 0.5rem 0 0.5rem;
+  width: 220px;
+  padding: 1rem;
   border: 0.5px solid rgb(136, 136, 136);
+  margin: 0.5rem;
 }
 
-.card:hover{
+.card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.card:hover {
   border: 0.5px solid rgb(206, 217, 142);
 }
 
-.card-grid{
+.card-grid {
   display: flex;
-  justify-content: space-evenly;
-  gap: 1rem;
-  width: 90vw;
-  height: auto;
+  justify-content: space-between;
   flex-wrap: wrap;
+  gap: 1.5rem;
+  width: 90vw;
   margin: 0 auto;
 }
 
 table {
- border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    display: table;
-    border: 1px solid #ccc;
-
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  display: table;
+  border: 1px solid #ccc;
 }
 
 td, th {
@@ -113,10 +165,96 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
-.dark{
-  background-color: #12121296;
-  color: white;
+/* Estilo del modo oscuro */
+/* Estilo del modo oscuro */
+/* Estilo general del modo oscuro */
+.dark {
+  background-color: #151835; /* Color de fondo general */
+  color: #ffffff;
 }
-.dark > a {
-  color: white;
+
+.dark a {
+  color: #ffffff;
+}
+
+/* Forzamos el estilo del nav con mayor especificidad o !important */
+.dark nav {
+  background-color: #797979 !important; /* Color específico del nav */
+  color: #ffffff;
+}
+
+/* Forzamos el estilo del main con mayor especificidad o !important */
+.dark main {
+  background-color: #1b1b2f !important; /* Color diferente para main */
+  color: #ffffff;
+}
+
+/* Estilo del footer, lo hacemos más específico para que no herede */
+.dark footer {
+  background-color: #5d5c5c !important; /* Color del footer */
+  color: #ffffff;
+}
+
+.dark .card {
+  background-color: #1e1e1e;
+  border: 0.5px solid #ffffff;
+}
+
+.dark .card:hover {
+  border: 0.5px solid rgb(206, 217, 142);
+}
+
+.dark .favButton {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.dark table {
+  border: 1px solid #ffffff;
+}
+
+.dark td, .dark th {
+  border: 1px solid #444444;
+}
+
+.dark tr:nth-child(even) {
+  background-color: #333333;
+}
+
+
+/* Estilo de la tabla de detalles */
+.detail-table {
+  width: 80%;
+  margin: 2rem auto;
+  border-collapse: collapse;
+}
+
+.detail-table th, .detail-table td {
+  border: 1px solid #ddddddc6;
+  text-align: center;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.detail-table th {
+  background-color: #f4f4f4c7;
+  font-weight: bold;
+}
+
+.detail-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.detail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.detail-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 32px;
+  font-weight: bold;
 }

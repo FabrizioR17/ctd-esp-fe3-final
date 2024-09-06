@@ -1,17 +1,27 @@
-import React from 'react'
-import Card from '../Components/Card'
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+import React, { useEffect, useState, useContext } from "react";
+import Card from "../Components/Card";
+import { ContextGlobal } from "../Components/utils/global.context";
 
 const Home = () => {
+  const [users, setUsers] = useState([]);
+  const { state } = useContext(ContextGlobal);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((data) => setUsers(data));
+  }, []);
+
   return (
-    <main className="" >
+    <main className={state.theme}>
       <h1>Home</h1>
       <div className='card-grid'>
-        {/* Aqui deberias renderizar las cards */}
+        {users.map(user => (
+          <Card key={user.id} {...user} />
+        ))}
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
