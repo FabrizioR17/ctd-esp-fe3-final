@@ -113,6 +113,7 @@ form {
   justify-content: space-around;
   width: 300px;
   height: 100px;
+  padding-left: 60px;
   margin: 0 auto;
 }
 
@@ -257,4 +258,49 @@ tr:nth-child(even) {
   margin-bottom: 1.5rem;
   font-size: 32px;
   font-weight: bold;
+}
+
+/* Centrar el botón "Reset All Favs" en el centro de la página */
+.reset-favs-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 20px auto; /* Margen automático para centrar */
+  display: block;    /* Lo convierte en un bloque para que el margin auto funcione */
+  text-align: center;
+}
+
+.reset-favs-btn:hover {
+  background-color: #b00;
+}
+
+/* Posicionamiento y estilos del botón "Remove from Favs" */
+.fav-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Asegura que el contenido de la card esté distribuido */
+  align-items: center;
+  padding-bottom: 10px; /* Asegura espacio para el botón */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #c0c9e0; /* Ajusta según el tema */
+}
+
+.remove-fav-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  left: 50%;    /* Centra horizontalmente respecto a la card */
+}
+
+.remove-fav-btn:hover {
+  background-color: #b00;
 }

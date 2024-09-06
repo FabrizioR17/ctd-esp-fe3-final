@@ -49,13 +49,17 @@ export const ContextProvider = ({ children }) => {
 
   // Fetch de los datos desde la API y almacenarlos en el contexto global
   useEffect(() => {
+    // Llamada a la API para obtener los datos
     axios
       .get("https://jsonplaceholder.typicode.com/users")
       .then((response) => {
         dispatch({ type: "SET_DATA", payload: response.data });
       })
       .catch((error) => console.log(error));
-  }, []);
+
+    // Cambio de tema en el body
+    document.body.classList.toggle('dark', state.theme === 'dark');
+  }, [state.theme]);
 
   // Memorizar el valor del contexto para mejorar el rendimiento
   const value = useMemo(() => ({ state, dispatch }), [state]);

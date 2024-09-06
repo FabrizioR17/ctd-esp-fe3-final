@@ -24,7 +24,6 @@ const Form = () => {
 
   return (
     <div>
-      <h2>Contacta con nosotros</h2>
       <form onSubmit={handleSubmit}>
         <input 
           type="text" 
