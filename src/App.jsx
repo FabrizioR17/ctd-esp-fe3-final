@@ -13,10 +13,12 @@ function App() {
       <Router>
         <Navbar/>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/favs" element={<Favs />} />
           <Route path="/dentist/:id" element={<Detail />} />
+          <Route path="*" element={<h1>Error 404. Page not found</h1>} />
         </Routes>
         <Footer/>
       </Router>

@@ -12,7 +12,7 @@ const Form = () => {
     event.preventDefault();
 
     // Validaciones
-    if (name.trim().length > 3 && emailRegex.test(email)) {
+    if (name.trim().length > 2 && emailRegex.test(email)) {
       setSubmitted(true);
       setError("");
       console.log("Datos enviados:", { name, email }); // Muestra los datos en consola
