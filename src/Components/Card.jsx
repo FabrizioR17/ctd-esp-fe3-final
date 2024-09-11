@@ -17,6 +17,9 @@ const Card = ({ name, username, id }) => {
     }
   };
 
+  // Verificar si ya está en favoritos para cambiar el botón
+  const isFav = state.favs.some((fav) => fav.id === id);
+
   return (
     <div className={`card ${state.theme}`}>
       <Link to={`/dentist/${id}`}>
@@ -24,8 +27,8 @@ const Card = ({ name, username, id }) => {
         <h3>{name}</h3>
         <p>{username}</p>
       </Link>
-      <button onClick={addFav} className="favButton">
-        Add fav ⭐
+      <button onClick={addFav} className="favButton" disabled={isFav}>
+        {isFav ? "Ya esta en favs ⭐" : "Añadir a favs ⭐"}
       </button>
     </div>
   );

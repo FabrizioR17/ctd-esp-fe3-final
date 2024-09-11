@@ -3,18 +3,26 @@ import { useParams } from "react-router-dom";
 import { ContextGlobal } from "../Components/utils/global.context";
 
 const DentistDetail = () => {
-  const { id } = useParams();  // Obtiene el id de la URL
-  const [dentist, setDentist] = useState(null);  // Estado para almacenar los datos del dentista
-  const { state } = useContext(ContextGlobal);
+  const { id } = useParams(); 
+  const { state } = useContext(ContextGlobal); 
+  const [dentist, setDentist] = useState(null); 
 
   useEffect(() => {
-    // Hace una llamada a la API para obtener los datos del dentista con el ID
-    fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then(response => response.json())
-      .then(data => setDentist(data));
-  }, [id]);
+    // Intenta encontrar el dentista en el estado global (state.data)
+    const dentistFromState = state.data.find(dentist => dentist.id === parseInt(id));
 
-  if (!dentist) return <p>Loading...</p>;  // Muestra un mensaje de carga mientras se obtienen los datos
+    if (dentistFromState) {
+      setDentist(dentistFromState);  // Si el dentista existe en el estado global, lo establece
+    } else {
+      // Si no está en el estado global, realiza una solicitud fetch
+      fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+        .then(response => response.json())
+        .then(data => setDentist(data))
+        .catch(error => console.error("Error fetching dentist:", error));
+    }
+  }, [id, state.data]);
+
+  if (!dentist) return <p>Loading...</p>; 
 
   return (
     <div className={`detail-container ${state.theme}`}>
@@ -42,3 +50,4 @@ const DentistDetail = () => {
 };
 
 export default DentistDetail;
+

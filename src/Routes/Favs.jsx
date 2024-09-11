@@ -3,39 +3,39 @@ import Card from "../Components/Card";
 import { ContextGlobal } from "../Components/utils/global.context";
 
 const Favs = () => {
-  const { state } = useContext(ContextGlobal);
-  const favs = JSON.parse(localStorage.getItem("favs")) || [];
+  const { state, dispatch } = useContext(ContextGlobal); 
 
-  // Función para eliminar un favorito
+  
   const removeFav = (id) => {
-    const updatedFavs = favs.filter(fav => fav.id !== id);
-    localStorage.setItem("favs", JSON.stringify(updatedFavs));
-    window.location.reload(); // Recargar la página para reflejar los cambios
+    const favToRemove = state.favs.find(fav => fav.id === id);
+    if (favToRemove) {
+      dispatch({ type: "REMOVE_FAV", payload: favToRemove });
+    }
   };
 
-  // Función para resetear todos los favoritos
+
   const resetFavs = () => {
+    dispatch({ type: "SET_FAVS", payload: [] });
     localStorage.removeItem("favs");
-    window.location.reload(); // Recargar la página para reflejar los cambios
   };
 
   return (
     <div className={state.theme}>
       <h1>Dentistas Favoritos</h1>
+
       
-      {/* Botón para resetear todos los favoritos */}
-      {favs.length > 0 && (
+      {state.favs.length > 0 && (
         <button onClick={resetFavs} className="reset-favs-btn">
           Reset All Favs
         </button>
       )}
 
       <div className="card-grid">
-        {favs.length > 0 ? (
-          favs.map(fav => (
+        {state.favs.length > 0 ? (
+          state.favs.map(fav => (
             <div key={fav.id} className="fav-card">
               <Card {...fav} />
-              {/* Botón para eliminar un favorito */}
+              
               <button 
                 onClick={() => removeFav(fav.id)} 
                 className="remove-fav-btn"
@@ -45,7 +45,7 @@ const Favs = () => {
             </div>
           ))
         ) : (
-          <p>No hay favoritos todavia!</p>
+          <p>No hay favoritos todavía!</p>
         )}
       </div>
     </div>
@@ -53,4 +53,5 @@ const Favs = () => {
 };
 
 export default Favs;
+
 

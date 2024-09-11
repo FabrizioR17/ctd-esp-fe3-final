@@ -15,7 +15,6 @@ const Form = () => {
     if (name.trim().length > 2 && emailRegex.test(email)) {
       setSubmitted(true);
       setError("");
-      console.log("Datos enviados:", { name, email }); // Muestra los datos en consola
     } else {
       setSubmitted(false);
       setError("Por favor verifique su información nuevamente");
@@ -25,17 +24,17 @@ const Form = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Nombre completo" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)} 
+        <input
+          type="text"
+          placeholder="Nombre completo"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
-        <input 
-          type="email" 
-          placeholder="Correo Electrónico" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
+        <input
+          type="email"
+          placeholder="Correo Electrónico"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <button type="submit">Enviar</button>
       </form>
