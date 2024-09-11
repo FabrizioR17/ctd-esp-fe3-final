@@ -14,7 +14,7 @@ const Navbar = () => {
       <a href="/home">Home</a>
       <a href="/contact">Contact</a>
       <a href="/favs">Favs</a>
-      <button onClick={toggleTheme}>Change theme</button>
+      <button onClick={toggleTheme} className="theme-toggle-button"></button>
     </nav>
   );
 };

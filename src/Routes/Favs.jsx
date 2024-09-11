@@ -21,7 +21,7 @@ const Favs = () => {
 
   return (
     <div className={state.theme}>
-      <h1>Dentists Favs</h1>
+      <h1>Dentistas Favoritos</h1>
       
       {/* Botón para resetear todos los favoritos */}
       {favs.length > 0 && (
@@ -45,7 +45,7 @@ const Favs = () => {
             </div>
           ))
         ) : (
-          <p>No favorites yet!</p>
+          <p>No hay favoritos todavia!</p>
         )}
       </div>
     </div>

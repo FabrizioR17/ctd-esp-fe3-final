@@ -67,6 +67,36 @@ nav img {
   color: rgb(136, 136, 136);
 }
 
+.theme-toggle-button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Modo claro: botón negro con letras blancas */
+.light .theme-toggle-button {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Modo oscuro: botón blanco con letras negras */
+.dark .theme-toggle-button {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Pseudoelementos para insertar el texto dinámicamente según el tema */
+.light .theme-toggle-button::before {
+  content: 'Dark Mode'; /* Texto en modo claro */
+}
+
+.dark .theme-toggle-button::before {
+  content: 'Light Mode'; /* Texto en modo oscuro */
+}
+
 /* Estilo del footer */
 footer {
   display: flex;
@@ -80,14 +110,15 @@ footer {
   width: 100%;
   height: auto; /* Ajusta el tamaño según el contenido */
   margin-top: 2rem;
+  background-color: #acbbc9;
 }
 
-footer > img {
+.footer img {
   width: 200px;
   margin: 1rem 0; /* Espacio entre el botón y la imagen */
 }
 
-footer > p {
+.footer p {
   margin: 0;
   padding-top: 0.7rem;
 }
@@ -106,6 +137,21 @@ footer > p {
 .back-button:hover {
   background-color: #b71c1c;
 }
+
+.social-icon {
+  width: 30px !important;
+  transition: transform 0.3s;
+  margin: 0.5rem !important; /* Asegura un pequeño margen alrededor de los iconos */
+}
+
+.footer.light .social-icon {
+  filter: invert(1); /* nero en el modo claro */
+}
+
+.footer.dark .social-icon {
+  filter: invert(0); /* blanco en el modo oscuro */
+}
+
 
 form {
   display: flex;
