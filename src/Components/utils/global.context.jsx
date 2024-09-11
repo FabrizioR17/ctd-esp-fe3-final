@@ -1,34 +1,46 @@
 import React, { createContext, useReducer, useEffect, useMemo } from "react";
 import axios from "axios";
 
+// Tipos de acción
+const TOGGLE_THEME = "TOGGLE_THEME";
+const SET_DATA = "SET_DATA";
+const ADD_FAV = "ADD_FAV";
+const REMOVE_FAV = "REMOVE_FAV";
+const SET_FAVS = "SET_FAVS";
+
 // Estado inicial
 export const initialState = {
   theme: "light",
-  data: [], // Guardar los datos obtenidos de la API
-  favs: JSON.parse(localStorage.getItem("favs")) || [], // Guardar favoritos
+  data: [],
+  favs: [],
 };
 
 // Reducer para manejar el estado
 const contextReducer = (state, action) => {
   switch (action.type) {
-    case "TOGGLE_THEME":
+    case TOGGLE_THEME:
       return {
         ...state,
         theme: state.theme === "light" ? "dark" : "light",
       };
-    case "SET_DATA":
+    case SET_DATA:
       return {
         ...state,
         data: action.payload,
       };
-    case "ADD_FAV":
+    case SET_FAVS:
+      return {
+        ...state,
+        favs: action.payload,
+      };
+    case ADD_FAV:
       const newFavs = [...state.favs, action.payload];
       localStorage.setItem("favs", JSON.stringify(newFavs));
       return {
         ...state,
         favs: newFavs,
       };
-    case "REMOVE_FAV":
+    case REMOVE_FAV:
       const updatedFavs = state.favs.filter((fav) => fav.id !== action.payload.id);
       localStorage.setItem("favs", JSON.stringify(updatedFavs));
       return {
@@ -47,17 +59,26 @@ export const ContextGlobal = createContext(undefined);
 export const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(contextReducer, initialState);
 
-  // Fetch de los datos desde la API y almacenarlos en el contexto global
+  // Cargar favoritos desde localStorage
   useEffect(() => {
-    // Llamada a la API para obtener los datos
-    axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((response) => {
-        dispatch({ type: "SET_DATA", payload: response.data });
-      })
-      .catch((error) => console.log(error));
+    const savedFavs = JSON.parse(localStorage.getItem("favs")) || [];
+    dispatch({ type: SET_FAVS, payload: savedFavs });
+  }, []);
 
-    // Cambio de tema en el body
+  // Fetch de los datos desde la API
+  useEffect(() => {
+    if (state.data.length === 0) {
+      axios
+        .get("https://jsonplaceholder.typicode.com/users")
+        .then((response) => {
+          dispatch({ type: SET_DATA, payload: response.data });
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [state.data]);
+
+  // Cambio de tema en el body
+  useEffect(() => {
     document.body.classList.toggle('dark', state.theme === 'dark');
   }, [state.theme]);
 
